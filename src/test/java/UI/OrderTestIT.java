@@ -29,9 +29,16 @@ public class OrderTestIT extends TestBase {
     homePage.navigateToHome();
   }
 
-  @Test(description = "02) Navigate to Iphone List page",dependsOnMethods = "mainPage",groups = "SmokeTest")
+  @Test(description = "02) Navigate to Iphone List page, Select Iphone Black",dependsOnMethods = "mainPage",groups = "SmokeTest")
   public void navIphoneList(){
     Assert.assertTrue(homePage.navToIphoneListPage()," Can not select Iphone List page from dropdown menu");
+    Assert.assertTrue(homePage.verifyIphoneBlack(),"Iphone Black is not listed in Iphone Page ");
+  }
+
+  @Test(description = "03) Order Iphone ", dependsOnMethods = "navIphoneList", groups = "SmokeTest")
+  public void addIphoneToCart(){
+    Assert.assertTrue(homePage.addIphoneToCart()," Can't add Iphone to cart ");
+
   }
 
 
