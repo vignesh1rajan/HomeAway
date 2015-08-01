@@ -4,6 +4,7 @@ import UI.AbstractPageObject.HeadPageBase;
 import UI.AbstractPageObject.PageBase;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +27,9 @@ public class CheckoutPage extends HeadPageBase {
   @FindBy(xpath = "//*[@id=\"checkout_page_container\"]/div[1]/table/tbody/tr[2]/td[3]") private WebElement quantityContainer;
   @FindBy(id = "current_country") private WebElement countryDropdown;
   @FindBy(id = "change_country") private WebElement shippingContainer;
+  @FindBy(className = "wpsc_buy_button") private WebElement purchaseBth;
+  @FindBy(id = "post-30") private WebElement confirmOrder;
+
   /*** Cost Table  **/
   @FindBy(className = "total_shipping") private WebElement shippingTable;
   @FindBy(className = "total_item") private WebElement itemCostTable;
@@ -119,5 +123,27 @@ public class CheckoutPage extends HeadPageBase {
       System.out.println("Cannot convert Currency to Int" + ex.getMessage());
     }
     return icurrency;
+  }
+
+  public boolean addCheckoutInfo(String email,String fname, String lname, String address, String city, String postal,
+                                  String country, String phone){
+    Select cSelect = new Select(billCountry);
+
+    try {
+      this.email.sendKeys(email);
+      this.fName.sendKeys(fname);
+      this.lName.sendKeys(lname);
+      this.address.sendKeys(address);
+      this.city.sendKeys(city);
+      this.pCode.sendKeys(postal);
+      cSelect.selectByVisibleText(country);
+      this.phone.sendKeys(phone);
+      this.sameShippingCB.click();
+    }catch (NoSuchElementException ex ){
+      System.out.println("cannot find element" + ex.getMessage());
+    }
+    purchaseBth.click();
+
+    return isWebElementVisible(confirmOrder);
   }
 }

@@ -16,6 +16,15 @@ public class OrderTestIT extends TestBase {
   CheckoutPage checkoutPage = null;
 
   int phonePrice;
+  /*** checkout info ***/
+  String fName = "Bigfish";
+  String lName = "Bigfoot";
+  String email = "test@gmail.com";
+  String address = "1600 Pensylvania Ave";
+  String city = "Conway";
+  String country = "USA";
+  String pcode = "72034";
+  String phone = "555-666-7798";
 
   /********************
    * Overridden methods
@@ -49,5 +58,6 @@ public class OrderTestIT extends TestBase {
   Assert.assertTrue(checkoutPage.checkoutIphone(), "Unable add Iphone to cart");
     checkoutPage.checkoutShipping();
     checkoutPage.verifyTotalCost(phonePrice);
+    checkoutPage.addCheckoutInfo(email,fName,lName,address,city,pcode,country,phone);
   }
 }
