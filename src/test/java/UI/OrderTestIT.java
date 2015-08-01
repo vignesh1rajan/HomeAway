@@ -13,6 +13,9 @@ import org.testng.annotations.Test;
 public class OrderTestIT extends TestBase {
 
   HomePage homePage = null;
+  CheckoutPage checkoutPage = null;
+
+  int phonePrice;
 
   /********************
    * Overridden methods
@@ -32,15 +35,19 @@ public class OrderTestIT extends TestBase {
   @Test(description = "02) Navigate to Iphone List page, Select Iphone Black",dependsOnMethods = "mainPage",groups = "SmokeTest")
   public void navIphoneList(){
     Assert.assertTrue(homePage.navToIphoneListPage()," Can not select Iphone List page from dropdown menu");
-    Assert.assertTrue(homePage.verifyIphoneBlack(),"Iphone Black is not listed in Iphone Page ");
+    phonePrice = homePage.getPhonePrice();
+    Assert.assertTrue(homePage.verifyIphoneBlack(), "Iphone Black is not listed in Iphone Page ");
   }
 
   @Test(description = "03) Order Iphone ", dependsOnMethods = "navIphoneList", groups = "SmokeTest")
   public void addIphoneToCart(){
-    Assert.assertTrue(homePage.addIphoneToCart()," Can't add Iphone to cart ");
-
+    checkoutPage = homePage.addIphoneToCart();
   }
 
-
-
+  @Test(description = "04) Checkout page", dependsOnMethods = "addIphoneToCart", groups = "SmokeTest")
+  public void checkoutCart(){
+  Assert.assertTrue(checkoutPage.checkoutIphone(), "Unable add Iphone to cart");
+    checkoutPage.checkoutShipping();
+    checkoutPage.verifyTotalCost(phonePrice);
+  }
 }

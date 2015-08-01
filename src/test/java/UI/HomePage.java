@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 /**
  * Created by vrajan on 7/29/2015.
  */
@@ -20,6 +23,8 @@ public class HomePage extends HeadPageBase {
     @FindBy(className = "go_to_checkout") private WebElement cartCheckoutButton;
 
     @FindBy(className = "post-29") private WebElement cartPage;
+
+
   /************
    * Constructor
    * @param webDriver - WebDriver used to interact with the page
@@ -43,7 +48,7 @@ public class HomePage extends HeadPageBase {
 
 
   public boolean navToIphoneListPage(){
-    this.selectScreen(productCategory,iphones);
+    this.selectScreen(productCategory, iphones);
 
     isWebElementVisible(iphoneTab);
     return true;
@@ -53,14 +58,31 @@ public class HomePage extends HeadPageBase {
     return isWebElementVisible(iphoneBlackList);
   }
 
-  public boolean addIphoneToCart(){
+  public int getPhonePrice(){
+    WebElement priceElement = iphoneBlackList.findElement(By.className("product_price_96"));
+    String sPrice = priceElement.getText();
+    NumberFormat nf =  NumberFormat.getCurrencyInstance();
+
+    //sPrice = sPrice.replace("$", "");Integer.parseInt(sPrice) ;
+
+    int phonePrice = 0;
+    try {
+      phonePrice = nf.parse(sPrice).intValue();
+    } catch(ParseException e) {
+      System.out.println("Unable to parse price format" + e.getMessage());
+    }
+
+    return phonePrice;
+  }
+  public CheckoutPage addIphoneToCart(){
+
     WebElement iphoneCart = iphoneBlackList.findElement(By.className("wpsc_buy_button"));
     iphoneCart.click();
     isWebElementVisible(cartDialogue);
     isWebElementVisible(cartCheckoutButton);
     cartCheckoutButton.click();
-    return isWebElementVisible(cartPage);
-
+    isWebElementVisible(cartPage);
+    return new CheckoutPage(webDriver,wait);
   }
 
 }
