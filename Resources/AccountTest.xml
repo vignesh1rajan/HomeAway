@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Order_Test" parallel="false">
+<suite name="Account_Test" parallel="false">
 
     <parameter name="browser" value="firefox" />
-    <test name="Order Iphone Test" parallel="false">
+    <test name="Account Page Test" parallel="false">
         <classes>
             <class
-                    name="UI.TestClasses.OrderTestIT" />
+                    name="UI.TestClasses.AccountsTest" />
         </classes>
     </test>
-</suite> <!-- Order Iphone -->
+</suite> <!-- Account Test -->

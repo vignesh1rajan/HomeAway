@@ -1,30 +1,21 @@
-package UI;
-
+package UI.TestClasses;
 
 import UI.AbstractPageObject.HeadPageBase;
+import UI.Pages.CheckoutPage;
+import UI.Pages.HomePage;
+import UI.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Created by vrajan on 7/29/2015.
+ * Created by vrajan on 8/2/2015.
  */
-public class OrderTestIT extends TestBase {
+public class CartTest extends TestBase {
 
   HomePage homePage = null;
   CheckoutPage checkoutPage = null;
-
-  int phonePrice;
-  /*** checkout info ***/
-  String fName = "Bigfish";
-  String lName = "Bigfoot";
-  String email = "test@gmail.com";
-  String address = "1600 Pensylvania Ave";
-  String city = "Conway";
-  String country = "USA";
-  String pcode = "72034";
-  String phone = "555-666-7798";
 
   /********************
    * Overridden methods
@@ -43,21 +34,13 @@ public class OrderTestIT extends TestBase {
 
   @Test(description = "02) Navigate to Iphone List page, Select Iphone Black",dependsOnMethods = "mainPage",groups = "SmokeTest")
   public void navIphoneList(){
-    Assert.assertTrue(homePage.navToIphoneListPage()," Can not select Iphone List page from dropdown menu");
-    phonePrice = homePage.getPhonePrice();
+    Assert.assertTrue(homePage.navToIphoneListPage(), " Can not select Iphone List page from dropdown menu");
     Assert.assertTrue(homePage.verifyIphoneBlack(), "Iphone Black is not listed in Iphone Page ");
   }
 
   @Test(description = "03) Order Iphone ", dependsOnMethods = "navIphoneList", groups = "SmokeTest")
   public void addIphoneToCart(){
     checkoutPage = homePage.addIphoneToCart();
-  }
-
-  @Test(description = "04) Checkout page", dependsOnMethods = "addIphoneToCart", groups = "SmokeTest")
-  public void checkoutCart(){
-  Assert.assertTrue(checkoutPage.checkoutIphone(), "Unable add Iphone to cart");
-    checkoutPage.checkoutShipping();
-    checkoutPage.verifyTotalCost(phonePrice);
-    checkoutPage.addCheckoutInfo(email,fName,lName,address,city,pcode,country,phone);
+    Assert.assertEquals(checkoutPage.removeFromCart(), "Oops, there is nothing in your cart.", "Empty Cart did not return message");
   }
 }

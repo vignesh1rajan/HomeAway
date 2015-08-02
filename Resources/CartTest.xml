@@ -3,10 +3,10 @@
 <suite name="Order_Test" parallel="false">
 
     <parameter name="browser" value="firefox" />
-    <test name="Order Iphone Test" parallel="false">
+    <test name="Empty Cart Test" parallel="false">
         <classes>
             <class
-                    name="UI.TestClasses.OrderTestIT" />
+                    name="UI.TestClasses.CartTest" />
         </classes>
     </test>
-</suite> <!-- Order Iphone -->
+</suite> <!-- Empty Iphone -->

@@ -1,4 +1,4 @@
-package UI;
+package UI.Pages;
 
 import UI.AbstractPageObject.HeadPageBase;
 import UI.AbstractPageObject.PageBase;
@@ -21,8 +21,13 @@ public class HomePage extends HeadPageBase {
     @FindBy(className = "product_view_96") private WebElement iphoneBlackList;
     @FindBy(className = "fancy_notification") private WebElement cartDialogue;
     @FindBy(className = "go_to_checkout") private WebElement cartCheckoutButton;
-
     @FindBy(className = "post-29") private WebElement cartPage;
+    @FindBy(className = "account_icon") private WebElement accountLink;
+    @FindBy(id = "ajax_loginform") private WebElement loginForm;
+    @FindBy(id = "login") private WebElement loginBtn;
+    @FindBy(name = "log") private WebElement useridText;
+    @FindBy(id = "pwd") private WebElement passwordFieldText;
+    @FindBy(id = "post-31")private WebElement accountPage;
 
 
   /************
@@ -38,6 +43,7 @@ public class HomePage extends HeadPageBase {
 
   public HomePage (PageBase pb){
     super(pb);
+    PageFactory.initElements(getWebDriver(), this);
   }
 
   public HomePage navigateToHome(){
@@ -46,7 +52,19 @@ public class HomePage extends HeadPageBase {
     return new HomePage(this);
   }
 
+  public boolean navToAccountPage(){
+    isWebElementVisible(accountLink);
+    accountLink.click();
+    return isWebElementVisible(loginForm);
+  }
 
+  public AccountsPage loginToAccount(String userid,String pass ){
+    useridText.sendKeys(userid);
+    passwordFieldText.sendKeys(pass);
+    loginBtn.click();
+    isWebElementVisible(accountPage);
+    return new AccountsPage(webDriver,wait);
+  }
   public boolean navToIphoneListPage(){
     this.selectScreen(productCategory, iphones);
 

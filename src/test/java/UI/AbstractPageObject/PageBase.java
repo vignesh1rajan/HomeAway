@@ -66,7 +66,7 @@ public abstract class PageBase {
   }
 
   /**
-   * Uses the standard wait object to look for the absence of the given WebElement.
+   * Uses the standard wait object to look for the absence of the given BY locator.
    *
    * @param by
    * @return true if the given element does not exist or is merely not visible. False if the element is still visible

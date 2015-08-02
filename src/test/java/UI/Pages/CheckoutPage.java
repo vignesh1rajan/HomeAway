@@ -1,4 +1,4 @@
-package UI;
+package UI.Pages;
 
 import UI.AbstractPageObject.HeadPageBase;
 import UI.AbstractPageObject.PageBase;
@@ -23,6 +23,8 @@ public class CheckoutPage extends HeadPageBase {
   @FindBy(xpath = "//*[@id=\"checkout_page_container\"]/div[1]/table/tbody/tr[2]/td[3]/form/input[1]") private WebElement quantityText;
   @FindBy(name = "submit") private WebElement updateBtn;
   @FindBy(className = "step2") private WebElement continueBtn;
+  @FindBy(className = "wpsc_product_remove") private WebElement removeClass;
+
   @FindBy(id = "wpsc_shopping_cart_container") private WebElement infoContainer;
   @FindBy(xpath = "//*[@id=\"checkout_page_container\"]/div[1]/table/tbody/tr[2]/td[3]") private WebElement quantityContainer;
   @FindBy(id = "current_country") private WebElement countryDropdown;
@@ -36,6 +38,7 @@ public class CheckoutPage extends HeadPageBase {
   @FindBy(className = "total_tax") private WebElement taxTable;
   @FindBy(id = "checkout_total") private WebElement totalCost;
   /*** Shiping Info  **/
+  @FindBy(className = "entry-content") private WebElement entryClass;
   @FindBy(id = "wpsc_checkout_form_9") private WebElement email;
   @FindBy(id = "wpsc_checkout_form_2") private WebElement fName;
   @FindBy(id = "wpsc_checkout_form_3") private WebElement lName;
@@ -145,5 +148,14 @@ public class CheckoutPage extends HeadPageBase {
     purchaseBth.click();
 
     return isWebElementVisible(confirmOrder);
+  }
+
+  public String removeFromCart(){
+    WebElement removeBtn = removeClass.findElement(By.name("submit"));
+    removeBtn.click();
+    System.out.println(entryClass.getText());
+    isWebElementInvisible(By.className("wpsc_product_remove"));
+    return entryClass.getText();
+
   }
 }
