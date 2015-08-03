@@ -15,7 +15,7 @@ Getting Started:
     Running from IDE-
       1. Import project as a maven project
       2. Get TestNG if it is not already installed
-      3. Create a TestNG configuration by "SuiteName" and choose any off .xml tests from "Resources/" folder
+      3. Create a TestNG configuration by "SuiteName" and choose any of .xml tests from "Resources/" folder. (RegressionTest.xml contains all the tests)
      
      
   Notes:
