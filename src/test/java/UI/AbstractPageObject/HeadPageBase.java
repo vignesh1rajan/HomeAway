@@ -13,6 +13,10 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class HeadPageBase extends PageBase {
 
+  /***
+    HeadPageBase contains all functions and objects related to top navigation PageObjects that remain in all the pages
+   ***/
+
   @FindBy(id = "menu-item-33") protected WebElement productCategory;
   @FindBy(xpath = "//*[@id=\"menu-item-37\"]/a") protected WebElement iphones;
 

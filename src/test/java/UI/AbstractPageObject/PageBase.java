@@ -11,6 +11,10 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class PageBase {
 
+  /**
+   * PageBase class contains the webdriver and wait object. It also contains utility functions common to all pages
+   */
+
   protected final WebDriver webDriver;
   protected FluentWait<WebDriver> wait = null;
 

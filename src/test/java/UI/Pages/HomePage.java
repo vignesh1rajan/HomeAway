@@ -16,6 +16,7 @@ import java.text.ParseException;
  * Created by vrajan on 7/29/2015.
  */
 public class HomePage extends HeadPageBase {
+
     @FindBy(id = "main-nav") private WebElement mainNav;
     @FindBy(id = "post-98") private WebElement iphoneTab;
     @FindBy(className = "product_view_96") private WebElement iphoneBlackList;
@@ -46,6 +47,10 @@ public class HomePage extends HeadPageBase {
     PageFactory.initElements(getWebDriver(), this);
   }
 
+  /**
+   *  Resets the browser to the main page  via the url
+   * @return new Homepage object with copy constuctor
+   */
   public HomePage navigateToHome(){
     getWebDriver().navigate().to("http://store.demoqa.com");
     isWebElementVisible(mainNav);
@@ -58,6 +63,12 @@ public class HomePage extends HeadPageBase {
     return isWebElementVisible(loginForm);
   }
 
+  /**
+   *
+   * @param userid - userid used to login to the accounts page
+   * @param pass  - password used to login to the accounts page
+   * @return new AccountsPage object
+   */
   public AccountsPage loginToAccount(String userid,String pass ){
     useridText.sendKeys(userid);
     passwordFieldText.sendKeys(pass);
