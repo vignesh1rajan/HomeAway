@@ -4,7 +4,7 @@ Automation Coding Exercise
 Getting Started:
     
     Pre-requisites- 
-      The environment must contain git, maven and firefox in order to run the tests successfully
+      The environment must contain git, maven, firefox and java in order to run the tests successfully
     
     Installation from commandline -
       1. Create a directory to store project
