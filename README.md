@@ -19,7 +19,14 @@ Getting Started:
      
      
   Notes:
-    In Order to keeps tests from failing move curser away from browser area (task bar).
+    In order to keeps tests from failing move curser away from browser area (task bar).
     
   Issues:
     There are many instances where locators "xpath" where used in order to find objects. This is very unreliable and hard to maintain. Best practices include having a unique id's for interactive objects. Naming conventions for classname and id's needs to be consistent and meaningfull. 
+   
+   Tools: 
+   
+      https://git-scm.com/downloads
+      https://maven.apache.org/download.cgi
+      https://maven.apache.org/install.html
+      https://www.mozilla.org/en-US/firefox/all/
